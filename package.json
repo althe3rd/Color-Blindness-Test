@@ -1,0 +1,19 @@
+{
+  "name": "colorblind-test",
+  "version": "1.0.0",
+  "description": "Tritanopia accessibility test station",
+  "scripts": {
+    "start": "npx serve .",
+    "dev": "npx serve . -l 3000",
+    "preview": "open http://localhost:3000 && npx serve . -l 3000"
+  },
+  "keywords": [
+    "accessibility",
+    "tritanopia",
+    "colorblind",
+    "a11y"
+  ],
+  "author": "",
+  "license": "MIT"
+}
+
