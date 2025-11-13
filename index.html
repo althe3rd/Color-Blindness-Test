@@ -42,20 +42,20 @@
             --difficult-border: #cbd5e0;
             --difficult-card-bg: #edf2f7;
 
-            /* Active palette (defaults to accessible) */
-            --bg: var(--accessible-bg);
-            --text: var(--accessible-text);
-            --link: var(--accessible-link);
-            --link-visited: var(--accessible-link-visited);
-            --link-hover: var(--accessible-link-hover);
-            --primary: var(--accessible-primary);
-            --secondary: var(--accessible-secondary);
-            --accent: var(--accessible-accent);
-            --success: var(--accessible-success);
-            --warning: var(--accessible-warning);
-            --info: var(--accessible-info);
-            --border: var(--accessible-border);
-            --card-bg: var(--accessible-card-bg);
+            /* Active palette (defaults to difficult to demonstrate issues) */
+            --bg: var(--difficult-bg);
+            --text: var(--difficult-text);
+            --link: var(--difficult-link);
+            --link-visited: var(--difficult-link-visited);
+            --link-hover: var(--difficult-link-hover);
+            --primary: var(--difficult-primary);
+            --secondary: var(--difficult-secondary);
+            --accent: var(--difficult-accent);
+            --success: var(--difficult-success);
+            --warning: var(--difficult-warning);
+            --info: var(--difficult-info);
+            --border: var(--difficult-border);
+            --card-bg: var(--difficult-card-bg);
         }
 
         body {
@@ -545,8 +545,8 @@ display:  none;
     <div class="container">
         <!-- Header -->
         <header class="page-header">
-            <h1 class="page-title">Tritanopia Accessibility Test Station</h1>
-            <p class="page-subtitle">Experience web design through the lens of blue-yellow color blindness</p>
+            <h1 class="page-title">Blue-Yellow Color Blindness Accessibility Test Station</h1>
+            
         </header>
 
         <!-- Control Panel -->
@@ -556,10 +556,10 @@ display:  none;
                 <div class="toggle-container">
                     <label class="toggle-label">Color Palette:</label>
                     <label class="toggle-switch">
-                        <input type="checkbox" id="paletteToggle">
+                        <input type="checkbox" id="paletteToggle" checked>
                         <span class="toggle-slider"></span>
                     </label>
-                    <span id="paletteStatus" class="status-indicator status-accessible">Accessible</span>
+                    <span id="paletteStatus" class="status-indicator status-difficult">Difficult</span>
                 </div>
 
                 <div class="toggle-container simulate-tritanopia">
@@ -572,13 +572,13 @@ display:  none;
                 </div>
             </div>
             <p style="margin-top: 20px; font-style: italic;">
-                Toggle the palette to see how problematic color choices (blues/yellows) affect readability for users with tritanopia. 
-                Enable the simulation filter to experience how someone with tritanopia would see these colors.
+                The page starts with the <strong>difficult palette</strong> (problematic blues/yellows) to immediately demonstrate accessibility issues. 
+                Toggle off to see the <strong>accessible palette</strong> with high-contrast colors that work better for tritanopia users.
             </p>
         </div>
 
         <!-- Information Box -->
-        <div class="info-box">
+        <!--<div class="info-box">
             <h3>What is Tritanopia?</h3>
             <p>
                 Tritanopia is a rare form of color blindness affecting approximately 0.01% of the population. 
@@ -586,7 +586,7 @@ display:  none;
                 Blues may appear greenish, and yellows may appear pink or light purple. 
                 This condition significantly impacts the perception of web interfaces that rely on blue-yellow color schemes.
             </p>
-        </div>
+        </div>-->
 
         <!-- Navigation Example -->
         <nav class="navigation">
@@ -613,8 +613,8 @@ display:  none;
                     <a href="#">Hover Link 3</a>. Notice how the hover state provides clear visual feedback.
                 </p>
                 <p>
-                    <strong>Tip:</strong> With the accessible palette, links use red tones which remain distinguishable 
-                    for people with tritanopia. The difficult palette uses blue links that can blend with text.
+                    <strong>Tip:</strong> The page starts with the difficult palette (blue links) that can be hard to distinguish. 
+                    Toggle to the accessible palette to see how red tones remain distinguishable for people with tritanopia.
                 </p>
             </div>
         </section>
@@ -669,8 +669,9 @@ display:  none;
 
             <div style="margin-top: 20px; padding: 15px; background: rgba(231, 111, 81, 0.1); border-left: 4px solid var(--warning); border-radius: 4px;">
                 <p style="margin: 0;">
-                    <strong>💡 Try this:</strong> Toggle to the "Difficult" palette and enable "Tritanopia Simulation" above. 
-                    Then try to find all the links in the paragraphs without hovering. Notice how they become nearly impossible to detect!
+                    <strong>💡 Try this:</strong> The page starts with the "Difficult" palette showing problematic colors. 
+                    Try to find all the links in the paragraphs above without hovering. Now toggle to the "Accessible" palette 
+                    and notice how much easier the underlined red links are to see!
                 </p>
             </div>
         </section>
@@ -779,7 +780,7 @@ display:  none;
             const root = document.documentElement;
             
             if (this.checked) {
-                // Switch to difficult palette
+                // Switch to difficult palette (checked = difficult)
                 root.style.setProperty('--bg', 'var(--difficult-bg)');
                 root.style.setProperty('--text', 'var(--difficult-text)');
                 root.style.setProperty('--link', 'var(--difficult-link)');
@@ -797,7 +798,7 @@ display:  none;
                 paletteStatus.textContent = 'Difficult';
                 paletteStatus.className = 'status-indicator status-difficult';
             } else {
-                // Switch to accessible palette
+                // Switch to accessible palette (unchecked = accessible)
                 root.style.setProperty('--bg', 'var(--accessible-bg)');
                 root.style.setProperty('--text', 'var(--accessible-text)');
                 root.style.setProperty('--link', 'var(--accessible-link)');

@@ -86,15 +86,17 @@ open index.html  # macOS
 
 ### Color Palettes
 
-**Accessible Palette** (Default)
-- Uses reds, greens, and high-contrast colors
-- Easily distinguishable for people with tritanopia
-- Follows WCAG accessibility guidelines
-
-**Difficult Palette**
+**Difficult Palette** (Default)
 - Uses problematic blues and yellows
 - Demonstrates poor color choices for tritanopia
 - Shows how color alone cannot convey information
+- Starts in this mode to immediately showcase accessibility issues
+
+**Accessible Palette**
+- Uses reds, greens, and high-contrast colors
+- Easily distinguishable for people with tritanopia
+- Follows WCAG accessibility guidelines
+- Toggle to this to see the proper approach
 
 ### Interactive Controls
 
@@ -139,10 +141,10 @@ If you prefer manual deployment without GitHub Actions:
 
 ## 📖 How to Use
 
-1. **Start with accessible palette** - Observe how all elements are clearly distinguishable
-2. **Toggle to difficult palette** - Notice how blues and yellows make it harder to distinguish elements
-3. **Enable tritanopia simulation** - See how someone with tritanopia perceives the colors
-4. **Experiment with combinations** - Try both palettes with and without the simulation filter
+1. **Page starts with difficult palette** - Immediately see how problematic blues and yellows affect readability
+2. **Toggle to accessible palette** - Compare with high-contrast colors that work better for tritanopia
+3. **Enable tritanopia simulation** - Experience how someone with tritanopia perceives the colors
+4. **Experiment with combinations** - Try both palettes with and without the simulation filter to understand the impact
 
 ## 🧪 What is Tritanopia?
 
