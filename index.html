@@ -138,10 +138,6 @@
             height: 34px;
         }
 
-        .simulate-tritanopia  {
-display:  none;
-        }
-
         .toggle-switch input {
             opacity: 0;
             width: 0;
@@ -562,7 +558,7 @@ display:  none;
                     <span id="paletteStatus" class="status-indicator status-difficult">Difficult</span>
                 </div>
 
-                <div class="toggle-container simulate-tritanopia">
+                <div class="toggle-container">
                     <label class="toggle-label">Tritanopia Simulation:</label>
                     <label class="toggle-switch">
                         <input type="checkbox" id="tritanopiaToggle">
@@ -574,6 +570,7 @@ display:  none;
             <p style="margin-top: 20px; font-style: italic;">
                 The page starts with the <strong>difficult palette</strong> (problematic blues/yellows) to immediately demonstrate accessibility issues. 
                 Toggle off to see the <strong>accessible palette</strong> with high-contrast colors that work better for tritanopia users.
+                Enable the <strong>tritanopia simulation</strong> to experience how someone with blue-yellow color blindness perceives these colors.
             </p>
         </div>
 
@@ -670,8 +667,8 @@ display:  none;
             <div style="margin-top: 20px; padding: 15px; background: rgba(231, 111, 81, 0.1); border-left: 4px solid var(--warning); border-radius: 4px;">
                 <p style="margin: 0;">
                     <strong>💡 Try this:</strong> The page starts with the "Difficult" palette showing problematic colors. 
-                    Try to find all the links in the paragraphs above without hovering. Now toggle to the "Accessible" palette 
-                    and notice how much easier the underlined red links are to see!
+                    Enable the "Tritanopia Simulation" toggle above, then try to find all the links in the paragraphs without hovering - they become nearly invisible! 
+                    Now toggle to the "Accessible" palette and notice how much easier the underlined red links are to see!
                 </p>
             </div>
         </section>
