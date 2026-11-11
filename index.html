@@ -10,7 +10,7 @@
     <style>
         /* ==========================================================
            1. Instrument chrome tokens (header, controls, audit, docs)
-              These never change with the specimen palette.
+              These never change with the preview palette.
            ========================================================== */
         :root {
             --paper: #f3f2ee;
@@ -314,7 +314,7 @@
         }
 
         /* ==========================================================
-           2. Specimen palettes (only applied inside .stage)
+           2. Preview palettes (only applied inside .stage)
            ========================================================== */
         .stage[data-palette="difficult"] {
             /* Intentionally poor: low contrast, blue/yellow & red/green pairs,
@@ -791,7 +791,7 @@
         </defs>
     </svg>
 
-    <a class="skip-link" href="#specimen">Skip to specimen</a>
+    <a class="skip-link" href="#preview">Skip to preview</a>
 
     <header class="site-header">
         <div class="wrap">
@@ -877,11 +877,11 @@
     </section>
 
     <main>
-        <section class="block" aria-labelledby="specimen-title">
+        <section class="block" aria-labelledby="preview-title">
             <div class="wrap">
                 <div class="block-head">
-                    <h2 class="block-title" id="specimen-title">Specimen</h2>
-                    <span class="eyebrow" id="specimenMeta"></span>
+                    <h2 class="block-title" id="preview-title">Preview</h2>
+                    <span class="eyebrow" id="previewMeta"></span>
                 </div>
                 <p class="block-intro">
                     A sample interface. The <strong>difficult</strong> palette uses low-contrast blues, yellows, reds and greens,
@@ -894,7 +894,7 @@
                         <p class="pane-caption" id="captionOriginal" hidden>
                             <svg class="icon" aria-hidden="true"><use href="#i-eye"/></svg>Original
                         </p>
-                        <div class="pane" id="specimen" tabindex="-1">
+                        <div class="pane" id="preview" tabindex="-1">
 
                             <!-- Navigation -->
                             <div class="card">
@@ -1142,7 +1142,7 @@
 
                 <div class="method">
                     <p>
-                        <strong>How the simulation works.</strong> A color matrix is applied in linear RGB to the specimen.
+                        <strong>How the simulation works.</strong> A color matrix is applied in linear RGB to the preview.
                         Protanopia, deuteranopia and tritanopia use the full-severity matrices from Machado, Oliveira &amp; Fernandes (2009).
                         Lower severities blend linearly toward normal vision, which approximates anomalous trichromacy.
                         Achromatopsia maps each color to its relative luminance. Simulations are a guide and won't match any one person's vision exactly.
@@ -1233,7 +1233,7 @@
         /* ---------------- Elements & state ---------------- */
         const $ = id => document.getElementById(id);
         const stage = $('stage');
-        const specimen = $('specimen');
+        const preview = $('preview');
         let matrixEl = $('cvdMatrix');
         const severityEl = $('severity');
         const splitEl = $('split');
@@ -1344,7 +1344,7 @@
             return getComputedStyle(stage).getPropertyValue(name).trim();
         }
         function updateSwatchHex() {
-            specimen.querySelectorAll('.swatch-hex').forEach(el => {
+            preview.querySelectorAll('.swatch-hex').forEach(el => {
                 el.textContent = token(el.dataset.token).toUpperCase();
             });
         }
@@ -1418,7 +1418,7 @@
             cap.className = 'pane-caption';
             cap.innerHTML = '<svg class="icon" aria-hidden="true"><use href="#i-eye"/></svg>';
             cap.append(document.createTextNode(captionText()));
-            const pane = specimen.cloneNode(true);
+            const pane = preview.cloneNode(true);
             pane.classList.add('is-simulated');
             pane.removeAttribute('tabindex');
             [pane, ...pane.querySelectorAll('*')].forEach(el => STRIP.forEach(a => el.removeAttribute(a)));
@@ -1455,7 +1455,7 @@
             $('splitState').textContent = state.split ? 'On' : 'Off';
             stage.classList.toggle('is-split', state.split);
             $('captionOriginal').hidden = !state.split;
-            specimen.classList.toggle('is-simulated', !state.split && state.sim !== 'none');
+            preview.classList.toggle('is-simulated', !state.split && state.sim !== 'none');
 
             updateSwatchHex();
             if (state.split) buildClone(); else removeClone();
@@ -1465,7 +1465,7 @@
             const simLabel = state.sim === 'none' ? 'no simulation'
                 : `${SIM_NAMES[state.sim]} at ${state.severity}%`;
             const text = `Palette: ${state.palette === 'difficult' ? 'Difficult' : 'Accessible'} · Simulation: ${simLabel}${state.split ? ' · Side-by-side' : ''}`;
-            $('specimenMeta').textContent = text;
+            $('previewMeta').textContent = text;
             if (announce && text !== lastAnnouncement) $('summary').textContent = text;
             lastAnnouncement = text;
 
@@ -1500,7 +1500,7 @@
         });
 
         // Sample links and buttons are inert demos.
-        specimen.addEventListener('click', e => {
+        preview.addEventListener('click', e => {
             const a = e.target.closest('a');
             if (a) e.preventDefault();
         });

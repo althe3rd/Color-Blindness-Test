@@ -8,10 +8,10 @@ An interactive, single-file teaching tool that shows how interface color choices
   - **Difficult**: low-contrast blues, yellows, reds and greens, with color as the *only* cue. Links have no underline, status is shown by colored dots, errors by a red border, and chart series by hue alone.
   - **Accessible**: passes WCAG 2.2 AA throughout. Every color is backed by a non-color cue: underlines, icons, text labels, chart markers, dash patterns and direct labels. It's safe for red-green *and* blue-yellow deficiencies.
 - **Four simulations**: protanopia, deuteranopia, tritanopia and achromatopsia, with a severity slider (10–100%) for anomalous trichromacy.
-- **Side-by-side view**: the original and the simulated specimen next to each other.
+- **Side-by-side view**: the original and the simulated preview next to each other.
 - **Live contrast audit**: WCAG contrast ratios for every token pair in the active palette, before and after simulation.
 - **Shareable state**: the palette, simulation, severity and layout are kept in the URL (`?palette=accessible&sim=deutan&severity=60&split=1`).
-- **Specimen components**: navigation, links in body text (with a "find the links" challenge), buttons, status indicators, alerts, form validation, a line chart and palette tokens.
+- **Preview components**: navigation, links in body text (with a "find the links" challenge), buttons, status indicators, alerts, form validation, a line chart and palette tokens.
 
 The tool follows its own advice. It uses keyboard-operable native radios and switches, visible focus rings, live-region announcements, reduced-motion support and a dark mode for the surrounding interface.
 
