@@ -4,7 +4,7 @@
 PORT ?= 8000
 
 help: ## Show this help message
-	@echo "Tritanopia Accessibility Test Station - Local Development"
+	@echo "Color Vision Test Station - Local Development"
 	@echo ""
 	@echo "Available commands:"
 	@echo "  make serve    - Start Python HTTP server on port $(PORT)"
@@ -17,25 +17,25 @@ help: ## Show this help message
 	@echo "  make serve PORT=3000  - Start on custom port"
 
 serve: ## Start Python HTTP server
-	@echo "🚀 Starting server on http://localhost:$(PORT)"
-	@echo "📝 Press Ctrl+C to stop"
-	@python3 -m http.server $(PORT) 2>/dev/null || python -m SimpleHTTPServer $(PORT)
+	@echo "Starting server on http://localhost:$(PORT)"
+	@echo "Press Ctrl+C to stop"
+	@python3 -m http.server $(PORT)
 
 start: ## Start server using npx serve
-	@echo "🚀 Starting server with npx serve..."
+	@echo "Starting server with npx serve..."
 	@npx serve . -l 3000
 
 dev: ## Start development server on port 3000
-	@echo "🚀 Starting development server on http://localhost:3000"
+	@echo "Starting development server on http://localhost:3000"
 	@npx serve . -l 3000
 
 preview: ## Start server and open in browser
-	@echo "🚀 Starting server and opening browser..."
-	@open http://localhost:3000 &
+	@echo "Starting server and opening browser..."
+	@(sleep 1 && open http://localhost:3000) &
 	@npx serve . -l 3000
 
 clean: ## Clean up temporary files
-	@echo "🧹 Cleaning up..."
+	@echo "Cleaning up..."
 	@find . -name ".DS_Store" -delete
-	@echo "✅ Done!"
+	@echo "Done!"
 

@@ -1,203 +1,69 @@
-# Tritanopia Accessibility Test Station
+# Color Vision Test Station
 
-An interactive web-based tool for demonstrating and testing web accessibility for users with tritanopia (blue-yellow color blindness).
+An interactive, single-file teaching tool that shows how interface color choices hold up for people with color vision deficiency (CVD).
 
-## 🎯 Purpose
+## What it does
 
-This tool helps developers, designers, and accessibility testers understand how color choices affect users with tritanopia. It provides:
+- **Two palettes**
+  - **Difficult**: low-contrast blues, yellows, reds and greens, with color as the *only* cue. Links have no underline, status is shown by colored dots, errors by a red border, and chart series by hue alone.
+  - **Accessible**: passes WCAG 2.2 AA throughout. Every color is backed by a non-color cue: underlines, icons, text labels, chart markers, dash patterns and direct labels. It's safe for red-green *and* blue-yellow deficiencies.
+- **Four simulations**: protanopia, deuteranopia, tritanopia and achromatopsia, with a severity slider (10–100%) for anomalous trichromacy.
+- **Side-by-side view**: the original and the simulated specimen next to each other.
+- **Live contrast audit**: WCAG contrast ratios for every token pair in the active palette, before and after simulation.
+- **Shareable state**: the palette, simulation, severity and layout are kept in the URL (`?palette=accessible&sim=deutan&severity=60&split=1`).
+- **Specimen components**: navigation, links in body text (with a "find the links" challenge), buttons, status indicators, alerts, form validation, a line chart and palette tokens.
 
-- **Interactive color palette toggle** - Switch between accessible (high contrast) and difficult (problematic blue/yellow) color schemes
-- **Tritanopia simulation filter** - Experience how someone with tritanopia perceives colors
-- **Comprehensive UI examples** - Links, buttons, forms, alerts, navigation, and more
-- **Educational content** - Learn about tritanopia and its impact on web accessibility
+The tool follows its own advice. It uses keyboard-operable native radios and switches, visible focus rings, live-region announcements, reduced-motion support and a dark mode for the surrounding interface.
 
-## 🚀 Live Demo
+## Simulation method
 
-Once deployed, access the tool at: `https://[your-username].github.io/colorblind-test/`
+A `feColorMatrix` filter runs in linear RGB, using the full-severity matrices from
+Machado, Oliveira & Fernandes (2009), *A Physiologically-based Model for Simulation of Color Vision Deficiency*.
+Lower severities blend linearly toward normal vision, which is an approximation. Achromatopsia maps each color to its relative luminance.
+The audit table uses the same math in JavaScript.
 
-## 💻 Local Development
+## Prevalence (approximate)
 
-Test the site locally before deploying. Choose any method below:
+| Type | Affected cone | Prevalence |
+|---|---|---|
+| Deuteranopia / deuteranomaly | M (green) | ≈ 6% of men |
+| Protanopia / protanomaly | L (red) | ≈ 2% of men |
+| Tritanopia / tritanomaly | S (blue) | ≈ 1 in 10,000 or rarer, all sexes |
+| Achromatopsia | none working | ≈ 1 in 30,000 |
 
-### Method 1: Using the Shell Script (Recommended)
+Overall, about 1 in 12 men and 1 in 200 women.
 
-```bash
-./serve.sh
-```
+## Design guidelines it demonstrates
 
-Or specify a custom port:
+- Never use color as the only way to convey information (WCAG 1.4.1).
+- Underline links in body text. Otherwise they need 3:1 contrast against the surrounding text plus a non-color cue on hover and focus.
+- Text needs 4.5:1 contrast (1.4.3). UI components and graphics need 3:1 (1.4.11).
+- Pair status colors with icons and words. Pair error borders with a message.
+- In charts, use markers, dash patterns and direct labels.
+- Test against several deficiency types: a palette that is safe for one can fail another.
 
-```bash
-./serve.sh 3000
-```
+## Local development
 
-Then open: `http://localhost:8000` (or your custom port)
-
-### Method 2: Using npm/npx
-
-```bash
-npm start
-# Opens on http://localhost:3000
-```
-
-Or with auto-open in browser:
-
-```bash
-npm run preview
-```
-
-### Method 3: Using Python Directly
-
-**Python 3:**
-```bash
-python3 -m http.server 8000
-```
-
-**Python 2:**
-```bash
-python -m SimpleHTTPServer 8000
-```
-
-Then open: `http://localhost:8000`
-
-### Method 4: Using Make (If you have make installed)
+No build step and no dependencies. You can open `index.html` directly, or serve it:
 
 ```bash
-make serve
-# or
-make preview  # Opens browser automatically
+./serve.sh          # http://localhost:8000
+make serve          # same, via make
+npm start           # npx serve on http://localhost:3000
 ```
 
-See all available commands:
-```bash
-make help
-```
+## Deployment
 
-### Method 5: Direct File Open (Limited)
+Pushing to `main` runs `.github/workflows/deploy.yml`, which publishes `index.html` to GitHub Pages
+(set **Settings → Pages → Source** to "GitHub Actions").
 
-Simply open `index.html` in your browser:
-```bash
-open index.html  # macOS
-```
+## Resources
 
-⚠️ Note: Some browsers may restrict certain features when opening files directly (file:// protocol). Using a local server is recommended.
+- [WebAIM: Color blindness](https://webaim.org/articles/visual/colorblind)
+- [WCAG 1.4.1 Use of Color](https://www.w3.org/WAI/WCAG22/Understanding/use-of-color.html)
+- [WCAG 1.4.11 Non-text Contrast](https://www.w3.org/WAI/WCAG22/Understanding/non-text-contrast.html)
+- [Colour Blind Awareness](https://www.colourblindawareness.org/)
 
-## 📋 Features
+## License
 
-### Color Palettes
-
-**Difficult Palette** (Default)
-- Uses problematic blues and yellows
-- Demonstrates poor color choices for tritanopia
-- Shows how color alone cannot convey information
-- Starts in this mode to immediately showcase accessibility issues
-
-**Accessible Palette**
-- Uses reds, greens, and high-contrast colors
-- Easily distinguishable for people with tritanopia
-- Follows WCAG accessibility guidelines
-- Toggle to this to see the proper approach
-
-### Interactive Controls
-
-1. **Color Palette Toggle** - Switch between accessible and difficult color schemes instantly
-2. **Tritanopia Simulation** - Apply a color matrix filter to simulate tritanopia vision
-
-### UI Components Tested
-
-- Hyperlinks (unvisited, visited, hover states)
-- Buttons with semantic colors (primary, secondary, success, warning, info)
-- Form elements (inputs, selects, checkboxes)
-- Alert messages (success, warning, info)
-- Navigation menus
-- Color swatches
-
-## 🛠️ GitHub Pages Deployment
-
-### Automatic Deployment
-
-This repository is configured for automatic deployment to GitHub Pages using GitHub Actions.
-
-**Setup Steps:**
-
-1. Go to your repository on GitHub
-2. Navigate to **Settings** → **Pages**
-3. Under "Build and deployment":
-   - **Source**: Select "GitHub Actions"
-4. Push to the `main` or `master` branch
-5. The site will automatically deploy via the GitHub Actions workflow
-
-### Manual Deployment (Alternative)
-
-If you prefer manual deployment without GitHub Actions:
-
-1. Go to **Settings** → **Pages**
-2. Under "Build and deployment":
-   - **Source**: Select "Deploy from a branch"
-   - **Branch**: Select `main` or `master`
-   - **Folder**: Select `/ (root)`
-3. Click **Save**
-4. Your site will be available at `https://[your-username].github.io/colorblind-test/`
-
-## 📖 How to Use
-
-1. **Page starts with difficult palette** - Immediately see how problematic blues and yellows affect readability
-2. **Toggle to accessible palette** - Compare with high-contrast colors that work better for tritanopia
-3. **Enable tritanopia simulation** - Experience how someone with tritanopia perceives the colors
-4. **Experiment with combinations** - Try both palettes with and without the simulation filter to understand the impact
-
-## 🧪 What is Tritanopia?
-
-Tritanopia is a rare form of color blindness affecting approximately **0.01% of the population** (about 1 in 10,000 people). 
-
-**Characteristics:**
-- Inability to distinguish between blue and yellow colors
-- Blues may appear greenish
-- Yellows may appear pink or light purple
-- Reds and greens are generally perceived normally
-
-**Web Accessibility Impact:**
-- Blue links on gray backgrounds may be hard to distinguish
-- Yellow warning indicators may be confused with other colors
-- Information conveyed through blue/yellow color coding alone is inaccessible
-
-## 🎨 Best Practices for Tritanopia-Friendly Design
-
-1. ✅ **Use red/green or high-contrast color combinations** instead of blue/yellow
-2. ✅ **Underline links** rather than relying on color alone
-3. ✅ **Use patterns, icons, or text** in addition to color for status indicators
-4. ✅ **Ensure sufficient contrast** between text and background (WCAG AA: 4.5:1 minimum)
-5. ✅ **Test with simulation tools** like this one
-6. ❌ **Avoid blue links** on blue/purple backgrounds
-7. ❌ **Don't use yellow/blue** as the only distinguishing factor
-
-## 🔧 Technical Details
-
-- **Pure HTML/CSS/JavaScript** - No build process required
-- **CSS Custom Properties** - Easy theme switching
-- **SVG Color Matrix Filter** - Accurate tritanopia simulation
-- **Responsive Design** - Works on desktop and mobile devices
-- **No external dependencies** - Loads fast and works offline
-
-## 📝 License
-
-This project is open source and available for educational and commercial use.
-
-## 🤝 Contributing
-
-Contributions are welcome! Feel free to:
-- Report issues
-- Suggest improvements
-- Submit pull requests
-- Share feedback on accessibility
-
-## 📚 Resources
-
-- [WebAIM: Color Blindness](https://webaim.org/articles/visual/colorblind)
-- [WCAG 2.1 Guidelines](https://www.w3.org/WAI/WCAG21/quickref/)
-- [Color Blind Awareness](http://www.colourblindawareness.org/)
-
----
-
-**Made for accessibility testing and education** 🌈
-
+MIT

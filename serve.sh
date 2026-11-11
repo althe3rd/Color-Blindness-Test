@@ -1,25 +1,11 @@
 #!/bin/bash
-
-# Simple local server script for testing the colorblind test station
-# Usage: ./serve.sh [port]
-
+# Serve the test station locally. Usage: ./serve.sh [port]
 PORT=${1:-8000}
 
-echo "🚀 Starting local server on http://localhost:$PORT"
-echo "📝 Press Ctrl+C to stop the server"
-echo ""
-
-# Check if Python 3 is available
-if command -v python3 &> /dev/null; then
-    echo "Using Python 3..."
-    python3 -m http.server $PORT
-# Fallback to Python 2
-elif command -v python &> /dev/null; then
-    echo "Using Python 2..."
-    python -m SimpleHTTPServer $PORT
-else
-    echo "❌ Error: Python is not installed"
-    echo "Please install Python or use: npm start"
+if ! command -v python3 &> /dev/null; then
+    echo "Error: python3 not found. Use 'npm start' instead." >&2
     exit 1
 fi
 
+echo "Serving on http://localhost:$PORT (Ctrl+C to stop)"
+exec python3 -m http.server "$PORT"
